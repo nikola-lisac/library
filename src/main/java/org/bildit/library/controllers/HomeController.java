@@ -17,8 +17,6 @@ public class HomeController {
 
 	@Autowired
 	private UserServiceImpl userService;
-	@Autowired
-	private BookServiceImpl bookService;
 
 	@RequestMapping(value = { "/", "home", "index" })
 	public String goHome(Model model) {
@@ -27,22 +25,6 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping("/user")
-	public String goUser(@RequestParam("username") String username, Model model) {
-		model.addAttribute("user", userService.getUserByUsername(username));
-		model.addAttribute("books", bookService.getAllBooks());
-		List<Book> listOfBooks = userService.getUserByUsername(username).getListOfBooksApproved();
-		model.addAttribute("usersBooks", listOfBooks);
-		return "user";
-	}
-
-	@RequestMapping("/rentbook")
-	public String rentBook(@RequestParam("username") String username, @RequestParam("bookname") String bookName,
-			Model model) {
-		userService.rentBookToUser(username, bookService.getBookByName(bookName));
-		return "redirect:/user?username="+username;
-	}
-	
 	@RequestMapping("/register")
 	public String register(Model model){
 		model.addAttribute("user", new User());
