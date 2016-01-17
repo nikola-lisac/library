@@ -70,7 +70,7 @@ public class UserServiceImpl implements UserService {
 	public void rentBookToUser(String username, Book book) {
 		// TODO Auto-generated method stub
 		User user = udao.getUserByUsername(username);
-		user.getListOfBooks().add(book);
+		user.getListOfBooksApproved().add(book);
 		bookservice.rentBook(book, user);
 		updateUser(user);
 	}
@@ -79,7 +79,7 @@ public class UserServiceImpl implements UserService {
 	public void returnBook(String username, Book book) {
 		// TODO Auto-generated method stub
 		User user = udao.getUserByUsername(username);
-		user.getListOfBooks().remove(book);
+		user.getListOfBooksApproved().remove(book);
 		bookservice.returnBook(book, user);
 		updateUser(user);
 	}
