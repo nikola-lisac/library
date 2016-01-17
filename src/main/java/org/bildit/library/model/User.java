@@ -67,9 +67,10 @@ public class User {
 	// išèitajte malo o fetchtypeovima
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "usersRented")
 	private List<Book> listOfBooksRequested = new ArrayList<>();
-	// TO ADD RELATION
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy ="usersRequested")
 	private List<Book> listOfBooksApproved = new ArrayList<>();
-	
+	@Column(name="ENABLED", columnDefinition = "TINYINT(1)")
+	private boolean enabled = false;
 	public List<Book> getListOfBooksApproved() {
 		return listOfBooksApproved;
 	}

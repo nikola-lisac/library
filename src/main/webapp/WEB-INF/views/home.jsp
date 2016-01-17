@@ -9,11 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h2>Dis be home madafaka</h2>
-	<c:forEach items="${users}" var="user">
-	<a href="<spring:url value="/user?username=${user.username}"/>">${user.username}</a>
-	${user.password}
-	<br/>
-	</c:forEach>
+	<h2>Dis be home</h2>
+	<a href="<spring:url value="/login"/>">LOGIN BRAH</a>
 </body>
 </html>

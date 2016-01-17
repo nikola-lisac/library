@@ -35,10 +35,15 @@ public class Book {
 	@Column(name = "AVAILABLE_BOOKS")
 	private int availableBooks;
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinTable(name = "USERS_BOOKS", joinColumns = {
+	@JoinTable(name = "USERS_BOOKS_RENTED", joinColumns = {
 			@JoinColumn(name = "BOOK_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "USER_ID", nullable = false, updatable = false) })
 	private List<User> usersRented = new ArrayList<>();
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinTable(name = "USERS_BOOKS_REQUESTED", joinColumns = {
+			@JoinColumn(name = "BOOK_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
+					@JoinColumn(name = "USER_ID", nullable = false, updatable = false) })
+	private List<User> usersRequested = new ArrayList<>();
 	@Column(name = "RENT_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date rentDate;
