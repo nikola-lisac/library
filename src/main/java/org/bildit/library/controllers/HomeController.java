@@ -42,4 +42,10 @@ public class HomeController {
 		userService.rentBookToUser(username, bookService.getBookByName(bookName));
 		return "redirect:/user?username="+username;
 	}
+	
+	@RequestMapping("/register")
+	public String register(Model model){
+		model.addAttribute("user", new User());
+		return "register";
+	}
 }

@@ -14,8 +14,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 import org.bildit.library.model.Book;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * @author Ognjen Mišiæ Model klase korisnika
@@ -49,13 +52,22 @@ public class User {
 	@Column(name = "USERNAME", nullable = false, unique = true) // jedinstveno
 																// korisnièko
 																// ime
+	@NotBlank(message="Must not be blank.")
+	@Size(min=5, max=15,message="Username must be between 5 and 15 chars.")
+	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Username must not contain spaces or special characters.")
 	private String username;
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 	@Transient
 	private String confirmPassword;
+	@NotBlank(message="Must not be blank.")
+	@Size(min=2, max=20,message="Name must be between 2 and 20 chars.")
+	@Pattern(regexp = "[a-zA-Z]+", message = "First name must contain only letters.")
 	@Column(name="FIRST_NAME", nullable = false)
 	private String firstName;
+	@NotBlank(message="Must not be blank.")
+	@Size(min=2, max=20,message="Name must be between 2 and 20 chars.")
+	@Pattern(regexp = "[a-zA-Z]+", message = "First name must contain only letters.")
 	@Column(name="LAST_NAME", nullable = false)
 	private String lastName;
 	

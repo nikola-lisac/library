@@ -10,6 +10,10 @@
 </head>
 <body>
 	<h2>Dis be home madafaka</h2>
+	<a href="${pageContext.request.contextPath}/register">Register</a>
+	<c:if test="${message != null }">
+	<h3><c:out value="${message}"/></h3>
+	</c:if>
 	<c:forEach items="${users}" var="user">
 	<a href="<spring:url value="/user?username=${user.username}"/>">${user.username}</a>
 	${user.password}

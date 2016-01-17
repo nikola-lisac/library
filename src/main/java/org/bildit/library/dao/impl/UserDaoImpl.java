@@ -6,6 +6,7 @@ import org.bildit.library.config.HibernateConfig;
 import org.bildit.library.dao.AbstractDao;
 import org.bildit.library.dao.UserDao;
 import org.bildit.library.model.User;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
@@ -87,6 +88,14 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 		}
 		int numOfRowsPostUpdate = ((Number) getSession().createQuery(COUNT_RECORDS).uniqueResult()).intValue();
 		return numOfRowsPostUpdate == (numOfRowsPreUpdate + users.size());
+	}
+
+	@Override
+	public boolean containsUsername(String username) {
+		Criteria crit = getSession().createCriteria(User.class);
+		crit.add(Restrictions.idEq(username));
+		User user = (User) crit.uniqueResult();
+		return user != null;
 	}
 
 }
