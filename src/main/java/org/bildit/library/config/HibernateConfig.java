@@ -22,10 +22,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  *
  */
 @Configuration
+@ComponentScan("org.bildit.library*")
 @EnableTransactionManagement
-@ComponentScan("org.bildit.library.config")
-// ova anotacija kaže konfiguraciji gdje se nalazi database.properties file (u
-// root folderu u ovom sluèaju)
 @PropertySource("classpath:database.properties")
 public class HibernateConfig {
 
@@ -74,7 +72,8 @@ public class HibernateConfig {
 		return sf;
 	}
 
-	// ovaj bean upravlja transakcijama, on u kombinaciji sa @transactional anotacijom osigurava transakcije i u sluèaju pada ih sam rollbackuje
+	// ovaj bean upravlja transakcijama, on u kombinaciji sa @transactional
+	// anotacijom osigurava transakcije i u sluèaju pada ih sam rollbackuje
 	@Bean
 	@Autowired
 	public HibernateTransactionManager transactionManager(SessionFactory sf) {

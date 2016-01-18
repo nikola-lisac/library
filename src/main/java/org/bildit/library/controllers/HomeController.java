@@ -5,6 +5,8 @@ import javax.validation.Valid;
 import org.bildit.library.model.User;
 import org.bildit.library.service.impl.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,8 +25,9 @@ public class HomeController {
 		return "home";
 	}
 
-	@RequestMapping("/login")
+	@RequestMapping(value = "/login", method = RequestMethod.GET)
 	public String login() {
+		System.out.println("CALLED GET LOGIN");
 		return "login";
 	}
 
@@ -32,6 +35,17 @@ public class HomeController {
 	public String register(Model model) {
 		model.addAttribute("user", new User());
 		return "register";
+	}
+
+	@RequestMapping("/user/control")
+	public String userCtrl(Model model) {
+		model.addAttribute("type", "USER");
+		return "control";
+	}
+	@RequestMapping("/admin/control")
+	public String adminCtrl(Model model) {
+		model.addAttribute("type", "ADMIN");
+		return "control";
 	}
 
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
@@ -59,5 +73,21 @@ public class HomeController {
 		userService.saveUser(user);
 		model.addAttribute("message", "You registered successfully.");
 		return "home";
+	}
+
+	// ovako dobijamo ko je ulogovan i ovlaštenja
+	protected static String[] getPrincipal() {
+		String username = null;
+		String authority = null;
+		String[] userAuth = { "anon", "anon" };
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		if (principal instanceof UserDetails) {
+			username = ((UserDetails) principal).getUsername();
+			authority = ((UserDetails) principal).getAuthorities().toArray()[0].toString();
+			userAuth = new String[] { username, authority };
+		} else {
+			username = principal.toString();
+		}
+		return userAuth;
 	}
 }
