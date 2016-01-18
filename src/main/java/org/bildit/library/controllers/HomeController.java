@@ -42,7 +42,7 @@ public class HomeController {
 		}
 
 		if (!user.getPassword().equals(user.getConfirmPassword())) {
-			result.rejectValue("confirmedPassword", "user.confirmedPassword", "Passwords do not match.");
+			result.rejectValue("confirmPassword", "user.confirmPassword", "Passwords do not match.");
 			return "register";
 		}
 		if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])([a-z0-9_-]+)$")) {
