@@ -17,5 +17,6 @@
 			<c:out value="${message}" />
 		</h3>
 	</c:if>
+	<a href="<spring:url value="/admin/addbook"/>">Add new book</a>
 </body>
 </html>

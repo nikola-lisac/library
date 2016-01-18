@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@RequestMapping("/admin")
 public class AdminController {
 	@Autowired
 	private BookServiceImpl bookService;
@@ -23,7 +24,14 @@ public class AdminController {
 		if (result.hasErrors()) {
 			return "newbook";
 		}
+		bookService.saveBook(book);
+		model.addAttribute("message", "Book has been added");
 		return "home";
+	}
 
+	@RequestMapping("/addbook")
+	public String addBook(Model model) {
+		model.addAttribute("book", new Book());
+		return "add_book";
 	}
 }
