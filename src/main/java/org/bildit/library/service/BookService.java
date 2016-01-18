@@ -1,12 +1,13 @@
 package org.bildit.library.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.bildit.library.model.Book;
 import org.bildit.library.model.User;
 
 public interface BookService {
-	List<Book> getAllBooks();
+	Set<Book> getAllBooks();
 	boolean deleteBook(Book book);
 	Book getBookById(Long id);
 	Book getBookByName(String bookName);

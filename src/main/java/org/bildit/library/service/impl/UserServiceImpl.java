@@ -1,6 +1,7 @@
 package org.bildit.library.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.bildit.library.dao.UserDao;
 import org.bildit.library.model.Book;
@@ -25,7 +26,7 @@ public class UserServiceImpl implements UserService {
 	private BookServiceImpl bookservice;
 
 	@Override
-	public List<User> getAllUsers() {
+	public Set<User> getAllUsers() {
 		// TODO Auto-generated method stub
 		return udao.getAllUsers();
 	}

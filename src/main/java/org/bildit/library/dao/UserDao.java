@@ -1,12 +1,13 @@
 package org.bildit.library.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.bildit.library.model.User;
 
 public interface UserDao {
 
-	List<User> getAllUsers();
+	Set<User> getAllUsers();
 	boolean deleteUser(User user);
 	User getUserById(Long id);
 	User getUserByUsername(String username);

@@ -1,6 +1,8 @@
 package org.bildit.library.dao.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.bildit.library.config.HibernateConfig;
 import org.bildit.library.dao.AbstractDao;
@@ -25,11 +27,10 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 	// tabele iz baze veæ kao ime klase koja je anotirana sa Entity
 	private static final String COUNT_RECORDS = "select count(*) from User";
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<User> getAllUsers() {
+	public Set<User> getAllUsers() {
 		// TODO Auto-generated method stub
-		return getAllEntities();
+		return new HashSet<User>(getAllEntities());
 	}
 
 	@Override

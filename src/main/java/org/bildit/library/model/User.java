@@ -1,7 +1,9 @@
 package org.bildit.library.model;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -75,19 +77,11 @@ public class User {
 	// uvijek znati gdje da ih naðe
 	// išèitajte malo o fetchtypeovima
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "usersRented")
-	private List<Book> listOfBooksRequested = new ArrayList<>();
+	private Set<Book> listOfBooksRequested = new HashSet<>();
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "usersRequested")
-	private List<Book> listOfBooksApproved = new ArrayList<>();
+	private Set<Book> listOfBooksApproved = new HashSet<>();
 	@Column(name = "ENABLED", columnDefinition = "TINYINT(1)")
 	private boolean enabled = false;
-
-	public List<Book> getListOfBooksApproved() {
-		return listOfBooksApproved;
-	}
-
-	public List<Book> getListOfBooksRequested() {
-		return listOfBooksRequested;
-	}
 
 	public Long getUserId() {
 		return userId;
@@ -131,6 +125,14 @@ public class User {
 
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+	}
+
+	public Set<Book> getListOfBooksRequested() {
+		return listOfBooksRequested;
+	}
+
+	public Set<Book> getListOfBooksApproved() {
+		return listOfBooksApproved;
 	}
 
 	@Override
