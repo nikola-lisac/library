@@ -80,6 +80,16 @@ public class User {
 	private Set<Book> listOfBooksApproved = new HashSet<>();
 	@Column(name = "ENABLED", columnDefinition = "TINYINT(1)")
 	private boolean enabled = false;
+	@Column(name="ROLE")
+	private String role = "ROLE_USER";
+	
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 	public Long getUserId() {
 		return userId;
