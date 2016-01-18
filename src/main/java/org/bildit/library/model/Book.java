@@ -2,7 +2,9 @@ package org.bildit.library.model;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -38,12 +40,12 @@ public class Book {
 	@JoinTable(name = "USERS_BOOKS_RENTED", joinColumns = {
 			@JoinColumn(name = "BOOK_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "USER_ID", nullable = false, updatable = false) })
-	private List<User> usersRented = new ArrayList<>();
+	private Set<User> usersRented = new HashSet<>();
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinTable(name = "USERS_BOOKS_REQUESTED", joinColumns = {
 			@JoinColumn(name = "BOOK_ID", nullable = false, updatable = false) }, inverseJoinColumns = {
 					@JoinColumn(name = "USER_ID", nullable = false, updatable = false) })
-	private List<User> usersRequested = new ArrayList<>();
+	private Set<User> usersRequested = new HashSet<>();
 	@Column(name = "RENT_DATE")
 	@Temporal(TemporalType.DATE)
 	private Date rentDate;
@@ -76,20 +78,6 @@ public class Book {
 		this.genre = genre;
 	}
 
-	public void setUsersRented(List<User> usersRented) {
-		this.usersRented = usersRented;
-	}
-
-	public Book() {
-		// TODO Auto-generated constructor stub
-	}
-
-	public Book(String bookAuthor, String bookName, int availableBooks) {
-		this.bookAuthor = bookAuthor;
-		this.bookName = bookName;
-		this.availableBooks = availableBooks;
-	}
-
 	public Long getBookId() {
 		return bookId;
 	}
@@ -110,7 +98,7 @@ public class Book {
 		this.bookName = bookName;
 	}
 
-	public List<User> getUsersRented() {
+	public Set<User> getUsersRented() {
 		return usersRented;
 	}
 
@@ -120,6 +108,10 @@ public class Book {
 
 	public void setAvailableBooks(int availableBooks) {
 		this.availableBooks = availableBooks;
+	}
+
+	public Set<User> getUsersRequested() {
+		return usersRequested;
 	}
 
 	@Override

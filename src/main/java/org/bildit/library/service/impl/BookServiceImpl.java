@@ -1,12 +1,12 @@
 package org.bildit.library.service.impl;
 
 import java.util.List;
+import java.util.Set;
 
 import org.bildit.library.dao.BookDao;
 import org.bildit.library.model.Book;
 import org.bildit.library.model.User;
 import org.bildit.library.service.BookService;
-import org.bildit.library.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +17,7 @@ public class BookServiceImpl implements BookService {
 	private BookDao bdao;
 
 	@Override
-	public List<Book> getAllBooks() {
+	public Set<Book> getAllBooks() {
 		// TODO Auto-generated method stub
 		return bdao.getAllBooks();
 	}

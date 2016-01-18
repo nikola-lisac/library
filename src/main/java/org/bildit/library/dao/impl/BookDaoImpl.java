@@ -1,6 +1,8 @@
 package org.bildit.library.dao.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.bildit.library.config.HibernateConfig;
 import org.bildit.library.dao.AbstractDao;
@@ -16,11 +18,10 @@ public class BookDaoImpl extends AbstractDao<Long, Book> implements BookDao {
 
 	private static final String COUNT_RECORDS = "select count(*) from Book";
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public List<Book> getAllBooks() {
+	public Set<Book> getAllBooks() {
 		// TODO Auto-generated method stub
-		return getAllEntities();
+		return new HashSet<Book>(getAllEntities());
 	}
 
 	@Override

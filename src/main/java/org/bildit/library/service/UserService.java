@@ -1,13 +1,14 @@
 package org.bildit.library.service;
 
 import java.util.List;
+import java.util.Set;
 
 import org.bildit.library.model.Book;
 import org.bildit.library.model.User;
 
 public interface UserService {
 
-	List<User> getAllUsers();
+	Set<User> getAllUsers();
 	boolean deleteUser(User user);
 	User getUserById(Long id);
 	User getUserByUsername(String username);
