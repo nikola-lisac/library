@@ -15,7 +15,7 @@
 		<sf:errors></sf:errors>
 		<sf:password path="password" />
 		<sf:errors></sf:errors>
-		<sf:password path="confirmpass" />
+		<sf:password path="confirmPassword" />
 		<sf:input path="firstName" />
 		<sf:errors></sf:errors>
 		<sf:input path="lastName" />
