@@ -40,6 +40,6 @@ public class AppConfig extends WebMvcConfigurerAdapter {
 	// uèitavanje statiènih resursa kao što su css, js i ostali fajlovi bla bla bla
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry reg) {
-		reg.addResourceHandler("/resource/**").addResourceLocations("/resource/");
+		reg.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 }

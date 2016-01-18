@@ -94,7 +94,7 @@ public class UserDaoImpl extends AbstractDao<Long, User> implements UserDao {
 	@Override
 	public boolean containsUsername(String username) {
 		Criteria crit = getSession().createCriteria(User.class);
-		crit.add(Restrictions.idEq(username));
+		crit.add(Restrictions.eq("username", username));
 		User user = (User) crit.uniqueResult();
 		return user != null;
 	}
