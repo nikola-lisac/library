@@ -11,5 +11,11 @@
 <body>
 	<h2>Dis be home</h2>
 	<a href="<spring:url value="/login"/>">LOGIN BRAH</a>
+	<a href="<spring:url value="/register"/>">Register</a>
+	<c:if test="${message != null }">
+		<h3>
+			<c:out value="${message}" />
+		</h3>
+	</c:if>
 </body>
 </html>

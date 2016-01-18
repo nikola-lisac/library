@@ -16,4 +16,10 @@ public class HomeController {
 	public String login() {
 		return "login";
 	}
+
+	@RequestMapping("/register")
+	public String register(Model model) {
+		model.addAttribute("user", new User());
+		return "register";
+	}
 }

@@ -16,4 +16,5 @@ public interface UserService {
 	boolean batchAddUsers(List<User> users);
 	void rentBookToUser(String username, Book book);
 	void returnBook(String username, Book book);
+	boolean containsUsername(String username);
 }

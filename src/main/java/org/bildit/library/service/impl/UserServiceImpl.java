@@ -84,4 +84,10 @@ public class UserServiceImpl implements UserService {
 		updateUser(user);
 	}
 
+	@Override
+	public boolean containsUsername(String username) {
+		// TODO Auto-generated method stub
+		return udao.containsUsername(username);
+	}
+
 }

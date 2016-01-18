@@ -3,7 +3,6 @@ package org.bildit.library.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,11 +10,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
-import org.bildit.library.model.Book;
+import org.hibernate.validator.constraints.NotBlank;
 
 /**
  * @author Ognjen Mišiæ Model klase korisnika
@@ -49,16 +49,25 @@ public class User {
 	@Column(name = "USERNAME", nullable = false, unique = true) // jedinstveno
 																// korisnièko
 																// ime
+	@NotBlank(message = "Must not be blank.")
+	@Size(min = 5, max = 15, message = "Username must be between 5 and 15 chars.")
+	@Pattern(regexp = "[a-zA-Z0-9]+", message = "Username must not contain spaces or special characters.")
 	private String username;
 	@Column(name = "PASSWORD", nullable = false)
 	private String password;
 	@Transient
 	private String confirmPassword;
-	@Column(name="FIRST_NAME", nullable = false)
+	@Column(name = "FIRST_NAME", nullable = false)
+	@NotBlank(message = "Must not be blank.")
+	@Size(min = 2, max = 20, message = "Name must be between 2 and 20 chars.")
+	@Pattern(regexp = "[a-zA-Z]+", message = "First name must contain only letters.")
 	private String firstName;
-	@Column(name="LAST_NAME", nullable = false)
+	@Column(name = "LAST_NAME", nullable = false)
+	@NotBlank(message = "Must not be blank.")
+	@Size(min = 2, max = 20, message = "Name must be between 2 and 20 chars.")
+	@Pattern(regexp = "[a-zA-Z]+", message = "First name must contain only letters.")
 	private String lastName;
-	
+
 	// jedan korisnik može da iznajmi više knjiga
 	// fetchtype.eager kaže hibernateu da povuèe objekte i da radimo sa živim
 	// objektima u memoriji
@@ -67,10 +76,11 @@ public class User {
 	// išèitajte malo o fetchtypeovima
 	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "usersRented")
 	private List<Book> listOfBooksRequested = new ArrayList<>();
-	@ManyToMany(fetch = FetchType.EAGER, mappedBy ="usersRequested")
+	@ManyToMany(fetch = FetchType.EAGER, mappedBy = "usersRequested")
 	private List<Book> listOfBooksApproved = new ArrayList<>();
-	@Column(name="ENABLED", columnDefinition = "TINYINT(1)")
+	@Column(name = "ENABLED", columnDefinition = "TINYINT(1)")
 	private boolean enabled = false;
+
 	public List<Book> getListOfBooksApproved() {
 		return listOfBooksApproved;
 	}
@@ -99,7 +109,6 @@ public class User {
 		this.password = password;
 	}
 
-
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
@@ -123,7 +132,7 @@ public class User {
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
-	
+
 	@Override
 	public String toString() {
 		return "User [userId=" + userId + ", username=" + username + ", password=" + password + "]";

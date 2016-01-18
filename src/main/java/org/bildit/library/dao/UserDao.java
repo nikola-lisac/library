@@ -13,4 +13,5 @@ public interface UserDao {
 	boolean saveUser(User user);
 	void updateUser(User user);
 	boolean batchAddUsers(List<User> users);
+	boolean containsUsername(String username);
 }
