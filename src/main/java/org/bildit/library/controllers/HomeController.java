@@ -1,5 +1,7 @@
 package org.bildit.library.controllers;
 
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.bildit.library.model.User;
@@ -21,7 +23,16 @@ public class HomeController {
 	private UserServiceImpl userService;
 
 	@RequestMapping(value = { "/", "home", "index" })
-	public String goHome() {
+	public String goHome(Model model) {
+		String[] userAuth = getPrincipal();
+		model.addAttribute("user", userAuth[0]);
+		model.addAttribute("auth", userAuth[1]);
+		if (userAuth[1].equals("ROLE_ADMIN")) {
+			model.addAttribute("username", userAuth[0]);
+			return "forward:/admin/control";
+		} else if (userAuth[1].equals("ROLE_USER")) {
+			return "forward:/user/control";
+		}
 		return "home";
 	}
 
