@@ -83,6 +83,14 @@ public class User {
 	@Column(name="ROLE")
 	private String role = "ROLE_USER";
 	
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public String getRole() {
 		return role;
 	}
